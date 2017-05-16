@@ -1,0 +1,23 @@
+<?
+include "_common.php";
+?>
+<style>
+	.mmsTopLogo { float:left; }
+	.mmsTopNavi { float:right; }
+</style>
+<div class="mmsTopLogo"><h2><font color="skyblue">&nbsp;&nbsp;&nbsp;미르헨지MMS</font></h2></div>
+<div class="mmsTopNavi">
+<table align="right">
+	<tr>
+		<td colspan="2" height="20"></td>
+	</tr>
+	<tr>
+		<td>
+		<?
+		echo "- ".$_SESSION[mb_name]."(".$_SESSION[cluster_id].")님 로그인중입니다 - ";
+		?>
+		</td>
+		<td height="20"><a href="/logout.php">로그아웃</a>&nbsp;</td>
+	</tr>
+</table>
+</div>

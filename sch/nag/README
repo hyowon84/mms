@@ -1,0 +1,4 @@
+#NagiosJSON PHP Class
+
+Require : PHP >= 5.2 for decoding json with json_decode
+	Curl extension for PHP, for HTTP_PROXY
