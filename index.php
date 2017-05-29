@@ -62,3 +62,6 @@ checkLogin();
 </head>
 <body></body>
 </html>
+<?
+$sqli->close();
+?>

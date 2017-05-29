@@ -17,7 +17,7 @@ Ext.define('mms.view.admin.GridNodeList',{
 		'Ext.form.*'	
 	],
 	alias:'widget.GridNodeList',
-	controller:'ClusterNodeListMainController',
+	//controller:'ClusterNodeListMainController',
 	remoteSort: true,
 	autoLoad : true,
 	initComponent: function(){

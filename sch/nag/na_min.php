@@ -31,21 +31,21 @@ while($row = $node->fetch_array()) {
 	$CPU_MAX_SQL = "SELECT	cluster_id,
 													node_id,
 													MAX(val_x) AS CPU_MAX_X
-									FROM		mms_data_cpu
+									FROM		mms_data_cpu_min
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$CPU_MAX = $sqli->query($CPU_MAX_SQL)->fetch_array();
 	$row['CPU_MAX_X'] = $CPU_MAX['CPU_MAX_X'];
-
+	
 
 	$MEM_MAX_SQL = "SELECT	cluster_id,
 													node_id,
 													MAX(val_x) AS MEM_MAX_X
-									FROM		mms_data_memory
+									FROM		mms_data_memory_min
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$MEM_MAX = $sqli->query($MEM_MAX_SQL)->fetch_array();
@@ -55,9 +55,9 @@ while($row = $node->fetch_array()) {
 	$DISK_MAX_SQL = "SELECT	cluster_id,
 													node_id,
 													MAX(val_x) AS DISK_MAX_X
-									FROM		mms_data_disk
+									FROM		mms_data_disk_min
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$DISK_MAX = $sqli->query($DISK_MAX_SQL)->fetch_array();
@@ -66,9 +66,9 @@ while($row = $node->fetch_array()) {
 	$NET_MAX_SQL = "SELECT	cluster_id,
 													node_id,
 													MAX(val_x) AS NET_MAX_X
-									FROM		mms_data_network
+									FROM		mms_data_network_min
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$NET_MAX = $sqli->query($NET_MAX_SQL)->fetch_array();
@@ -86,11 +86,14 @@ while($row = $node->fetch_array()) {
 	//echo date("Y-m-d H:i:s", substr($CPU[result][last_data_update],0,10))."<BR>";	//마지막 업데이트
 	//리눅스 1492063812  10자리,  윈도우 1491890655 000			//$temp[0] = str_replace("'1 min avg Load'=","",$temp[0]);
 	$val_x = substr($CPU[result][last_data_update], 0, 10);
+	
+	echo " $val_x > $row[CPU_MAX_X] \r\n<br>";
+	
 	if($val_x > $row['CPU_MAX_X']) {
 		$temp = explode(';', $CPU[data][service][perf_data]);  //'1 min avg Load'=30%;80;90;0;100    사용률 30%;워닝80%;크리티컬90%;미니멈0;맥시멈100
 		preg_match('/([0-9\.]*)%/', $temp[0], $match);
 
-		$val_y1 = $match[1];      //사용률
+		$val_y1 = $match[1];      	//사용률
 		$val_y6 = 100 - $match[1];  //대기자원
 
 		$INS_SQL = "	INSERT INTO 	mms_data_cpu	SET
@@ -105,6 +108,24 @@ while($row = $node->fetch_array()) {
 																	val_y6 = '$val_y6',
 																	m_date = from_unixtime($val_x),
 																	reg_date = NOW();
+		";
+
+		$INS_SQL = "	INSERT INTO mms_data_cpu_min SET
+																	cluster_id = '$클러스터ID',		/*클러스터명*/
+																	node_id = '$노드ID',								/*그룹ID*/
+																	val_x = '$val_x',								/*X좌표 값(시간)*/
+																	
+																	mdate = DATE_FORMAT(from_unixtime($val_x),'%H:%i'),
+																	m_date = from_unixtime($val_x),
+																	reg_date = NOW(),
+																	
+																	D1 = '$val_y1',
+																	D1_MIN = '$val_y1',
+																	D1_AVG = '$val_y1',
+																	
+																	D6 = '$val_y6',
+																	D6_MIN = '$val_y6',
+																	D6_AVG = '$val_y6'
 		";
 		$sqli->query($INS_SQL);
 	}
@@ -142,6 +163,25 @@ while($row = $node->fetch_array()) {
 																	m_date = from_unixtime($val_x),
 																	reg_date = NOW();
 		";
+
+		$INS_SQL = "	INSERT INTO mms_data_memory_min SET
+																	cluster_id = '$클러스터ID',		/*클러스터명*/
+																	node_id = '$노드ID',								/*그룹ID*/
+																	val_x = '$val_x',								/*X좌표 값(시간)*/
+																	
+																	mdate = DATE_FORMAT(from_unixtime($val_x),'%H:%i'),
+																	m_date = from_unixtime($val_x),
+																	reg_date = NOW(),
+																	
+																	D1 = '$val_y1',
+																	D1_MIN = '$val_y1',
+																	D1_AVG = '$val_y1',
+																	
+																	D5 = '$val_y5',
+																	D5_MIN = '$val_y5',
+																	D5_AVG = '$val_y5'
+		";
+		
 		$sqli->query($INS_SQL);
 	}
 	
@@ -173,6 +213,25 @@ while($row = $node->fetch_array()) {
 																	m_date = from_unixtime($val_x),
 																	reg_date = NOW();
 		";
+
+		$INS_SQL = "	INSERT INTO mms_data_disk_min SET
+																	cluster_id = '$클러스터ID',		/*클러스터명*/
+																	node_id = '$노드ID',								/*그룹ID*/
+																	val_x = '$val_x',								/*X좌표 값(시간)*/
+																	
+																	mdate = DATE_FORMAT(from_unixtime($val_x),'%H:%i'),
+																	m_date = from_unixtime($val_x),
+																	reg_date = NOW(),
+																	
+																	D1 = '$val_y1',
+																	D1_MIN = '$val_y1',
+																	D1_AVG = '$val_y1',
+																	
+																	D2 = '$val_y2',
+																	D2_MIN = '$val_y2',
+																	D2_AVG = '$val_y2'
+		";
+
 		$sqli->query($INS_SQL);
 	}
 	
@@ -205,6 +264,23 @@ while($row = $node->fetch_array()) {
 																	m_date = from_unixtime($val_x),
 																	reg_date = NOW();
 		";
+		$INS_SQL = "	INSERT INTO mms_data_network_min SET
+																	cluster_id = '$클러스터ID',		/*클러스터명*/
+																	node_id = '$노드ID',								/*그룹ID*/
+																	val_x = '$val_x',								/*X좌표 값(시간)*/
+																	
+																	mdate = DATE_FORMAT(from_unixtime($val_x),'%H:%i'),
+																	m_date = from_unixtime($val_x),
+																	reg_date = NOW(),
+																	
+																	D1 = '$val_y1',
+																	D1_MIN = '$val_y1',
+																	D1_AVG = '$val_y1',
+																	
+																	D2 = '$val_y2',
+																	D2_MIN = '$val_y2',
+																	D2_AVG = '$val_y2'
+		";
 		$sqli->query($INS_SQL);
 	}
 	//echo $INS_SQL;
@@ -218,5 +294,7 @@ while($row = $node->fetch_array()) {
 	$sqli->query($UPD_SQL);
 		
 }
-	
+
+
+$sqli->close();
 ?>

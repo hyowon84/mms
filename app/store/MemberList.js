@@ -101,4 +101,17 @@ Ext.define('mms.store.mbInfo', {
 	}
 });
 
+/*회원유형 */
+Ext.define('mms.store.mb_types', {
+	extend: 'Ext.data.ArrayStore',
+	//extend: 'Ext.data.Store',
+	model: 'mms.model.comboDefault',
+	alias: 'store.mb_types',		
+	data: [
+		['마스터','M10'],
+		['일반','M20']
+	]
+});
+
+
 var myInfo = Ext.create('mms.store.mbInfo');

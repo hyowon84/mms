@@ -7,7 +7,7 @@ Ext.define('mms.view.dashboard.MainController', {
 		var tab = obj;
 		var o_store = tab.query('[name=Chart]');
 		var v_param = new Object();
-		var ttype = ['min','hour','day','month'];
+		var ttype = ['minute','hour','day','month'];
 		
 		v_param.node_id = tab.node_id;
 

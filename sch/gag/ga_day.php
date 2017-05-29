@@ -228,4 +228,6 @@ $sql = " 			INSERT INTO mms_data_disk_day (
 ";
 $sqli->query($sql);
 
+
+$sqli->close();
 ?>

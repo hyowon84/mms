@@ -10,9 +10,10 @@ $mb_id = 'test';
  * */
 
 
+
+$mb_id = $_SESSION['mb_id'];
 $cluster_id = $_POST['cluster_id'];
 $mb_company = $_POST['mb_company'];
-$mb_id = $_POST['mb_id'];
 $mb_password = $_POST['mb_password'];
 $mb_password2 = $_POST['mb_password2'];
 $mb_password3 = $_POST['mb_password3'];

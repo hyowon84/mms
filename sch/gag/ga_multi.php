@@ -22,12 +22,30 @@ while($gr = $gr_result->fetch_array()) {
 //);
 $time = time();
 
-$LOCKING_TB = "LOCK TABLES mms_data_cpu WRITE;
-							LOCK TABLES mms_data_memory WRITE;
-							LOCK TABLES mms_data_network WRITE;
-							LOCK TABLES mms_data_disk WRITE;";
 
-$sqli->query($LOCKING_TB);
+
+/* 3시간 이하의 데이터는 삭제 */
+$del_sql = "
+DELETE FROM mms_data_cpu WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
+DELETE FROM mms_data_memory WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
+DELETE FROM mms_data_disk WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
+DELETE FROM mms_data_network WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
+";
+$sqli->query($del_sql);
+
+//$sqli->query("DELETE FROM mms_data_cpu WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
+//$sqli->query("DELETE FROM mms_data_memory WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
+//$sqli->query("DELETE FROM mms_data_disk WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
+//$sqli->query("DELETE FROM mms_data_network WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
+
+
+
+//$LOCKING_TB = "LOCK TABLES mms_data_cpu WRITE;
+//							LOCK TABLES mms_data_memory WRITE;
+//							LOCK TABLES mms_data_network WRITE;
+//							LOCK TABLES mms_data_disk WRITE;";
+//
+//$sqli->query($LOCKING_TB);
 
 //실행
 $res = fetch_multi_url($url_list);
@@ -45,5 +63,5 @@ echo '</pre>';
 //실행 시간
 echo '--<br />time:'.(time() - $time).' sec';
 
-
+$sqli->close();
 ?>

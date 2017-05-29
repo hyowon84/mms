@@ -11,10 +11,10 @@ include_once('_common.php');
 $범위조건 = "	AND			m_date >= DATE_ADD(NOW(),INTERVAL -60 MINUTE)
 							AND			m_date <= DATE_ADD(NOW(),INTERVAL -1 MINUTE)
 						";
-$범위조건 = '';
 $날짜포맷 = " DATE_FORMAT(from_unixtime(M.val_x),'%H:%i') ";
 $날짜셋팅값 = " DATE_FORMAT(M.m_date,'%Y-%m-%d %H:%i:59') ";
 
+//$범위조건 = '';
 
 /* CPU 분별 데이터 */
 $sql = " 			INSERT INTO mms_data_cpu_min (
@@ -77,6 +77,7 @@ $sql = " 			INSERT INTO mms_data_cpu_min (
 															LEFT JOIN mms_data_cpu_min MD ON (MD.cluster_id = T.cluster_id AND MD.node_id = T.node_id AND MD.m_date = T.m_date)
 											WHERE		MD.`no` IS NULL
 ";
+//echo $sql;
 $sqli->query($sql);
 
 
@@ -230,4 +231,6 @@ $sql = " 			INSERT INTO mms_data_disk_min (
 ";
 $sqli->query($sql);
 
+
+$sqli->close();
 ?>

@@ -151,7 +151,7 @@ Ext.define('mms.view.charts.CpuReport', {
 					grid: true,
 					minimum: 0,
 					maximum: 100,
-					fields: ['D1','D2','D3','D4','D5','D6'],
+					fields: ['D1','D2'],
 					renderer:	'onAxisLabelRender100Per'
 				},
 				{
@@ -162,9 +162,9 @@ Ext.define('mms.view.charts.CpuReport', {
 			series: [{
 				type: 'area',
 				//fullStack: true,
-				title: [ 'User','Nice','System','Wait','Steal','Idle'],
+				title: [ '사용중','사용가능'],
 				xField: 'mdate',
-				yField: ['D1','D2','D3','D4','D5','D6'],
+				yField: ['D1','D2'],
 				style: {
 					opacity: 0.50
 				},
@@ -585,13 +585,13 @@ Ext.define('mms.view.charts.DynamicChartMemoryUse', {
 		{
 			xtype: 'cartesian',
 			reference: 'DynamicChartMemoryUse',
+			store : { type: 'DynamicChartMemoryUse' },
 			name: 'DynamicChart',
 			height: 300,
 			legend: {
 				docked: 'bottom',
 				boxStrokeWidth:0
 			},
-			store : { type: 'DynamicChartMemoryUse' },
 			insetPadding: '40 40 40 40',
 			axes: [
 				{

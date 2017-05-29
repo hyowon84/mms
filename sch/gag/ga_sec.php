@@ -84,7 +84,7 @@ while($gr = $gr_result->fetch_array()) {
 													MAX(val_x) AS MEM_MAX_X
 									FROM		mms_data_memory
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$MEM_MAX = $sqli->query($MEM_MAX_SQL)->fetch_array();
@@ -95,18 +95,18 @@ while($gr = $gr_result->fetch_array()) {
 													MAX(val_x) AS CPU_MAX_X
 									FROM		mms_data_cpu
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$CPU_MAX = $sqli->query($CPU_MAX_SQL)->fetch_array();
-	$gr[1] = $MEM_MAX['CPU_MAX_X'];
+	$gr[1] = $CPU_MAX['CPU_MAX_X'];
 	
 	$NET_MAX_SQL = "SELECT	cluster_id,
 													node_id,
 													MAX(val_x) AS NET_MAX_X
 									FROM		mms_data_network
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$NET_MAX = $sqli->query($NET_MAX_SQL)->fetch_array();
@@ -117,7 +117,7 @@ while($gr = $gr_result->fetch_array()) {
 													MAX(val_x) AS DISK_MAX_X
 									FROM		mms_data_disk
 									WHERE		cluster_id = '$클러스터ID'
-									AND			node_id = '노드ID'
+									AND			node_id = '$노드ID'
 									GROUP BY cluster_id, node_id
 	";
 	$DISK_MAX = $sqli->query($DISK_MAX_SQL)->fetch_array();
@@ -250,4 +250,5 @@ while($gr = $gr_result->fetch_array()) {
 
 echo '--<br />time:'.(time() - $time).' sec';
 
+$sqli->close();
 ?>

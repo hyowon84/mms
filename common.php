@@ -29,16 +29,18 @@ if (DOMAIN) {
 }
 
 if (isset($mms_path['path'])) {
-	define('PATH', $mms_path['path']);
+	define('M_PATH', $mms_path['path']);
 } else {
-	define('PATH', '');
+	define('M_PATH', '');
 }
 unset($mms_path);
 
-define('SRC',PATH.'/resources');
+define('SRC_PATH',M_PATH.'/resources');
+define('TEMP_PATH',SRC_PATH.'/temp');
 
-include_once(SRC.'/dbconfig.php');
-include_once(SRC."/lib/Snoopy.class.php");
+
+include_once(SRC_PATH.'/dbconfig.php');
+include_once(SRC_PATH."/lib/Snoopy.class.php");
 
 
 //==============================================================================
@@ -47,7 +49,7 @@ include_once(SRC."/lib/Snoopy.class.php");
 @ini_set("session.use_trans_sid", 0);	// PHPSESSID를 자동으로 넘기지 않음
 @ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함
 
-session_save_path(PATH.'/session');
+session_save_path(M_PATH.'/session');
 
 if (isset($SESSION_CACHE_LIMITER))
 	@session_cache_limiter($SESSION_CACHE_LIMITER);

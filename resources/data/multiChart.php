@@ -117,7 +117,9 @@ function makeWhere($cluster_id, $node_id) {
 	";
 		$추가조건 = $계정조건.$기간조건;
 	}
-	
+	else {
+		$추가조건 = $계정조건.$기간조건;
+	}
 	
 	return $추가조건;
 }

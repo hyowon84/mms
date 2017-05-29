@@ -1,3 +1,38 @@
+/* 콤보박스 */
+Ext.define('mms.view.combo.node_os', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_nodeos',
+	queryMode: 'local',
+	editable: false,
+	displayField: 'name',
+	valueField: 'value',
+	name: 'node_os',
+	value : 'LINUX',
+	fieldLabel: 'O/S',
+	store: {
+		type: 'node_os'
+	},
+	width : 250
+});
+
+
+/* 콤보박스 */
+Ext.define('mms.view.combo.node_type', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_nodetype',
+	queryMode: 'local',
+	editable: false,
+	displayField: 'name',
+	valueField: 'value',
+	name: 'node_type',
+	value : 'VM',
+	fieldLabel: '유형',
+	store: {
+		type: 'node_type'
+	},
+	width : 250
+});
+
 
 Ext.define('mms.view.admin.ClusterNodeListMain', {
 	extend: 'Ext.panel.Panel',
@@ -17,13 +52,13 @@ Ext.define('mms.view.admin.ClusterNodeListMain', {
 	viewModel:{
 		//type:'infoMain'
 	},
-	title: '관리',
+	name : 'ClusterNodeListMain',
 	bodyPadding:'5 5 5 5',
-	width: '100%',
-	layout: {
-		type: 'hbox',
-		pack: 'start',
-		align: 'stretch'
+	width : '100%',
+	layout : {
+		type : 'hbox',
+		pack : 'start',
+		align : 'stretch'
 	},
 	defaults: {
 		frame: false,

@@ -3,9 +3,9 @@
  */
 
 /* 회원 목록 */
-Ext.define('mms.view.admin.GridMemberList',{
+Ext.define('mms.view.master.GridMemberListB',{
 	extend: 'Ext.grid.Panel',
-	xtype: 'GridMemberList',
+	xtype: 'GridMemberListB',
 	//viewModel: { type: 'MemberList' },
 	requires: [
 		'Ext.selection.CellModel',
@@ -15,8 +15,8 @@ Ext.define('mms.view.admin.GridMemberList',{
 		'Ext.ux.SlidingPager',
 		'Ext.form.*'	
 	],
-	name : 'GridMemberList',
-	alias:'widget.GridMemberList',
+	name : 'GridMemberListB',
+	alias:'widget.GridMemberListB',
 	controller:'MbListMainController',
 	remoteSort: true,
 	autoLoad : true,
@@ -34,15 +34,11 @@ Ext.define('mms.view.admin.GridMemberList',{
 			},
 			autoWidth : true,
 			columns : [
+				{ text : 'ID'		,					dataIndex : 'mb_id',				width : 120,		align:'left'	},
+				{ text : '회원명',				dataIndex : 'mb_name',			width : 120,		align:'left',		editor:{allowBlank:true}	},
+				{ text : '연락처',				dataIndex : 'mb_hp',				width : 140,		align:'left',		editor:{allowBlank:true}	},
+				{ text : '이메일',				dataIndex : 'mb_email',			width : 200,		align:'left',		editor:{allowBlank:true}	}
 				
-				{ text : '유형',				dataIndex : 'mb_type_name',	width : 120,		align:'left'	},
-				{ text : '로그인ID',		dataIndex : 'mb_id',				width : 100,		align:'left'	},
-				{ text : '부모ID',			dataIndex : 'cluster_id',		width : 120,		align:'left'	},
-				{ text : '소속',				dataIndex : 'cluster_name',	width : 120,		align:'left'	},
-				{ text : '회원명',			dataIndex : 'mb_name',			width : 100,		align:'left',		editor:{allowBlank:true}	},
-				{ text : '연락처',			dataIndex : 'mb_hp',				width : 100,		align:'left',		editor:{allowBlank:true}	},
-				{ text : '이메일',			dataIndex : 'mb_email',			width : 100,		align:'left',		editor:{allowBlank:true}	},
-				{ text : '등급',				dataIndex : 'mb_level',			width : 100,		align:'left',		editor:{allowBlank:true},		hidden:true	}				
 			],
 			//selModel	: {
 			//	type: 'cellmodel'

@@ -8,23 +8,6 @@
 include_once('_common.php');
 
 
-/* 3시간 이하의 데이터는 삭제 */
-
-$del_sql = "
-DELETE FROM mms_data_cpu WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
-DELETE FROM mms_data_memory WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
-DELETE FROM mms_data_disk WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
-DELETE FROM mms_data_network WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR);
-";
-$sqli->query($del_sql);
-
-//$sqli->query("DELETE FROM mms_data_cpu WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-//$sqli->query("DELETE FROM mms_data_memory WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-//$sqli->query("DELETE FROM mms_data_disk WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-//$sqli->query("DELETE FROM mms_data_network WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-
-
-
 $범위조건 = "	AND			M_date >= DATE_ADD(NOW(),INTERVAL -25 HOUR)
 							AND			M_date <= DATE_ADD(NOW(),INTERVAL -1 HOUR)
 						";
@@ -254,4 +237,6 @@ $sql = " 			INSERT INTO mms_data_disk_hour (
 ";
 $sqli->query($sql);
 
+
+$sqli->close();
 ?>

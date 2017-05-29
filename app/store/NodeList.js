@@ -47,3 +47,29 @@ Ext.define('mms.store.NodeList', {
 		}
 	}
 });
+
+
+/*노드 OS */
+Ext.define('mms.store.node_os', {
+	extend: 'Ext.data.ArrayStore',
+	//extend: 'Ext.data.Store',
+	model: 'mms.model.comboDefault',
+	alias: 'store.node_os',
+	data: [
+		['LINUX','O00'],
+		['WINDOW','O10']
+	]
+});
+
+/*노드 유형 */
+Ext.define('mms.store.node_type', {
+	extend: 'Ext.data.ArrayStore',
+	//extend: 'Ext.data.Store',
+	model: 'mms.model.comboDefault',
+	alias: 'store.node_type',
+	data: [
+		['VM','VM'],
+		['BM','BM']
+	]
+});
+

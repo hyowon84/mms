@@ -1,14 +1,14 @@
 
-Ext.define('mms.view.info.MbInfoForm', {
+Ext.define('mms.view.info.ClusterInfoForm', {
 	extend: 'Ext.form.Panel',
-	alias:'widget.frm_mbinfo',
-	id : 'frm_mbinfo',
+	alias:'widget.frm_clusterinfo',
+	id : 'frm_clusterinfo',
 	frame:true,
 	xtype: 'form',
 	//controller:'infoMain',
 	width: 800,
 	bodyPadding: 10,
-	url : '/resources/crud/mbinfo.update.php',
+	url : '/resources/crud/info.update.php',
 	fieldDefaults: {
 		labelAlign: 'right',
 		labelWidth: 120,
@@ -17,7 +17,7 @@ Ext.define('mms.view.info.MbInfoForm', {
 	items: [
 		{
 			xtype: 'fieldset',
-			title: '회원정보',
+			title: '회원 정보',
 			defaultType: 'textfield',
 			layout: 'anchor',
 			defaults: {
@@ -90,7 +90,49 @@ Ext.define('mms.view.info.MbInfoForm', {
 						}
 					]
 				}
+			]
+		},
+		{
+			xtype: 'fieldset',
+			title: '마스터 정보',
+			defaultType: 'textfield',
+			layout: 'anchor',
+			defaults: {
+				anchor: '100%'
+			},
+			items: [
+				{
+					xtype: 'fieldcontainer',
+					layout: 'anchor',
+					defaultType: 'textfield',
+					margin: '0 0 5 0',
+					items: [
 
+						{
+							xtype : 'displayfield',
+							fieldLabel: '클러스터ID',
+							name: 'cluster_id',
+							labelWidth : 140,
+							width: 600,
+							readOnly : true,
+							allowBlank: true
+						},
+						{
+							fieldLabel: 'SOFTLAYER API ID',
+							name: 'api_id',
+							labelWidth : 140,
+							width: 600,
+							allowBlank: true
+						},
+						{
+							fieldLabel: 'SOFTLAYER API KEY',
+							name: 'api_key',
+							labelWidth : 140,
+							width: 600,
+							allowBlank: true
+						}
+					]
+				}
 			]
 		}
 	],

@@ -259,39 +259,140 @@ Ext.define('mms.store.DynamicChartMemoryUse', {
 			var data = Ext.decode(response.responseText);
 			//store.model.setFields(data.fields);
 			
-			var chart = this;
+			var charts = Ext.ComponentQuery.query('[name=DynamicChart]');
+			var chart;
+			
+			//스토에 매칭되는 차트 선택
+			for(var i = 0; i < charts.length; i++) {
+				if(charts[i].reference == this.type) {
+					chart = charts[i];
+					break;
+				}
+			}
+
+			//var test = Ext.getCmp(chart.id); getCmp랑 query랑 동일한 속성의 오브젝트
 			
 			
-			//set array series
+			//axes, series 셋팅
+			//chart.series.add({
+			//	type: 'line',
+			//	title: 'node00t',
+			//	xField: 'mdate',
+			//	yField: 'D1'
+			//});
+			
+			
+			//chart.setAxes();
+			var axes = [];
+			axes = [
+			{
+				type: 'numeric',
+					position: 'left',
+				title: 'Bytes / sec',
+				fields: ['D1', 'D2'],
+				grid: true,
+				minimum: 0,
+				renderer:	function (axis, label, layoutContext) {
+					return Ext.util.Format.number(label/1024/1024, '0.0');
+				}
+			},
+			{
+				type: 'category',
+					position: 'bottom'
+			}];
+			
 			var series = [];
-			//clear series
-			chart.series.clear();
-			for(var field in data.fields){
-				if(data.fields[field] !== xField){
-					chart.series.add({
-						type:'line',
-						xField:xField,
-						yField:data.fields[field]
-					});
-			
-					series.push(data.fields[field]);
+			series = [
+				{
+					type: 'line',
+					title: 'node00t',
+					xField: 'mdate',
+					yField: 'D1',
+					style: {lineWidth: 3},
+					marker: {
+						opacity: 0,
+						scaling: 0.01,
+						fx: {
+							duration: 200,
+							easing: 'easeOut'
+						}
+					},
+					highlightCfg: {
+						opacity: 1,
+						scaling: 1.5
+					}
+					/*,tooltip: {
+						trackMouse: true,
+						renderer: 'onSeriesTooltipRenderMB'
+					}*/
+				},
+				{
+					type: 'line',
+					title: 'node01t',
+					xField: 'mdate',
+					yField: 'D2',
+					style: {lineWidth: 3},
+					marker: {
+						opacity: 0,
+						scaling: 0.01,
+						fx: {
+							duration: 200,
+							easing: 'easeOut'
+						}
+					},
+					highlightCfg: {
+						opacity: 1,
+						scaling: 1.5
+					}
+				},
+				{
+					type: 'line',
+					title: 'node02t',
+					xField: 'mdate',
+					yField: 'D3',
+					style: {lineWidth: 3},
+					marker: {
+						opacity: 0,
+						scaling: 0.01,
+						fx: {
+							duration: 200,
+							easing: 'easeOut'
+						}
+					},
+					highlightCfg: {
+						opacity: 1,
+						scaling: 1.5
+					}
 				}
-			}
+			];
+
+			//chart.axes = axes;
+			//chart.series = series;
 			
-			var mAxes = chart.axes.items;
-			for(var axis in mAxes){
-				if(mAxes[axis].type === "Numeric"){
-					mAxes[axis].fields = series;
-					mAxes[axis].maximum = data.maximum;
-					mAxes[axis].minimum = data.minimum;
-				}
-			}
-			chart.axes.items = [];
-			chart.axes.items = mAxes;
-			chart.bindStore(store);
+			
+			//chart.redraw();
+			//chart.refresh();
+			
+			//chart.setAxes(axes);
+			return;
+			
+			
+			chart.add(axes);
+			chart.add(series);
+			
+			chart.applyAxes(axes);
+			chart.setSeries(series);
+			chart.applySeries(series);
 			chart.redraw();
 			chart.refresh();
 			
+			
+			chart.applyData(data);
+			
+			chart.bindStore(this);
+			chart.applyStore(this);
+			chart.redraw();
+			chart.refresh();
 			
 		}
 	}

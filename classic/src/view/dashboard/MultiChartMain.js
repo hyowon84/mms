@@ -8,7 +8,7 @@ Ext.define('mms.view.dashboard.MultiChartMain', {
 		'mms.store.EventLog'
 	],
 	controller:'dashboardMain',
-	closable: false,
+	closable: true,
 	title: '멀티차트',
 	width: '100%',
 	frame : false,
@@ -60,7 +60,7 @@ Ext.define('mms.view.dashboard.MultiChartMain', {
 										};
 
 										////멀티차트 페이지내 모든 차트들을 셀렉트, 차트별로 패러미터 적용 및 로딩
-										var o_chart = btn.up().up().up().query('[name=Chart]');
+										var o_chart = btn.up().up().up().query('[name=DynamicChart]');
 										//
 										//var series = [];
 										////clear series
@@ -73,52 +73,6 @@ Ext.define('mms.view.dashboard.MultiChartMain', {
 											store.load();
 										}
 
-									
-									//{
-									//	o_chart.series.add({
-									//		type		: 'line',
-									//		title		: sm[i].data.node_id,
-									//		xField	: 'mdate',
-									//		yField	: 'D'+(i+1),
-									//		style: {lineWidth: 3},
-									//		marker: {
-									//			opacity: 0,
-									//			scaling: 0.01,
-									//			fx: {
-									//				duration: 200,
-									//				easing: 'easeOut'
-									//			}
-									//		},
-									//		highlightCfg: {
-									//			opacity: 1,
-									//			scaling: 1.5
-									//		},
-									//		tooltip: {
-									//			trackMouse: true,
-									//			renderer: function (tooltip, record, item) {
-									//				var title = item.series.getTitle();
-									//				tooltip.setHtml(record.get('mdate') + ' ' + title + ': ' + record.get(item.series.getYField()));
-									//			}
-									//		}
-									//	});
-									//
-									//	series.push('D'+(i+1));
-									//	
-									//}
-									//
-									//var mAxes = o_chart.axes.items;
-									//for(var axis in mAxes){
-									//	if(mAxes[axis].type === "Numeric"){
-									//		mAxes[axis].fields = series;
-									//		//mAxes[axis].maximum = data.maximum;
-									//		mAxes[axis].minimum = data.minimum;
-									//	}
-									//}
-									//o_chart.axes.items = [];
-									//o_chart.axes.items = mAxes;
-									//o_chart.bindStore(store);
-									//o_chart.redraw();
-									//o_chart.refresh();
 									
 								}
 								

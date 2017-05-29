@@ -231,4 +231,6 @@ $sql = " 			INSERT INTO mms_data_disk_month (
 ";
 $sqli->query($sql);
 
+
+$sqli->close();
 ?>

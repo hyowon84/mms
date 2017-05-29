@@ -10,10 +10,13 @@ Ext.define('mms.view.charts.ToolbarController', {
 		var o_store = tab.query('[name=Chart]');
 		var v_param = new Object();
 		v_param.node_id = tab.node_id;
-		v_param.timetype = tab.query('radiogroup')[0].getValue().timetype; 
-		
+		v_param.timetype = tab.query('radiogroup')[0].getValue().timetype;
+		v_param.sdate = tab.query('[name=sdate]')[0].getValue();
+		v_param.edate = tab.query('[name=edate]')[0].getValue();
+
 		for(var i = 0; i < o_store.length; i++) {
 			var store = o_store[i].getStore();
+			store.loadData([],false);
 			Ext.apply(store.getProxy().extraParams, v_param);
 			store.load();
 		}
@@ -27,9 +30,12 @@ Ext.define('mms.view.charts.ToolbarController', {
 		var o_store = tab.query('[name=Chart]');
 		var v_param = new Object();
 		v_param.node_id = tab.node_id;
-
+		v_param.sdate = tab.query('[name=sdate]')[0].getValue();
+		v_param.edate = tab.query('[name=edate]')[0].getValue();
+		
 		for(var i = 0; i < o_store.length; i++) {
 			var store = o_store[i].getStore();
+			store.loadData([],false);
 			Ext.apply(store.getProxy().extraParams, v_param);
 			store.load();
 		}

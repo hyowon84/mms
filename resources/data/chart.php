@@ -44,35 +44,35 @@ CPU 그래프 : 선 그래프
 
 //$cluster_id = 'ssoh';
 //$node_id = 'node00';
-
-$날짜포맷['min'] = "DATE_FORMAT(from_unixtime(val_x),'%H:%i')";
+$기간조건 = '';
+$날짜포맷['minute'] = "DATE_FORMAT(from_unixtime(val_x),'%H:%i')";
 $날짜포맷['hour'] = "DATE_FORMAT(from_unixtime(val_x),'%H시')";
 $날짜포맷['day'] = "DATE_FORMAT(from_unixtime(M.val_x),'%m-%d')";
 $날짜포맷['month'] = "DATE_FORMAT(from_unixtime(M.val_x),'%Y-%m')";
 $날짜포맷['year'] = "DATE_FORMAT(from_unixtime(M.val_x),'%Y')";
 
-$timetype = ($timetype) ? $timetype : 'min';
+$timetype = ($timetype) ? $timetype : 'minute';
 $날짜포맷 = $날짜포맷[$timetype];
 
-$테이블['cpu']['min'] = "mms_data_cpu_min";
+$테이블['cpu']['minute'] = "mms_data_cpu_min";
 $테이블['cpu']['hour'] = "mms_data_cpu_hour";
 $테이블['cpu']['day'] = "mms_data_cpu_day";
 $테이블['cpu']['month'] = "mms_data_cpu_month";
 $테이블['cpu']['year'] = "mms_data_cpu_year";
 
-$테이블['memory']['min'] = "mms_data_memory_min";
+$테이블['memory']['minute'] = "mms_data_memory_min";
 $테이블['memory']['hour'] = "mms_data_memory_hour";
 $테이블['memory']['day'] = "mms_data_memory_day";
 $테이블['memory']['month'] = "mms_data_memory_month";
 $테이블['memory']['year'] = "mms_data_memory_year";
 
-$테이블['network']['min'] = "mms_data_network_min";
+$테이블['network']['minute'] = "mms_data_network_min";
 $테이블['network']['hour'] = "mms_data_network_hour";
 $테이블['network']['day'] = "mms_data_network_day";
 $테이블['network']['month'] = "mms_data_network_month";
 $테이블['network']['year'] = "mms_data_network_year";
 
-$테이블['disk']['min'] = "mms_data_disk_min";
+$테이블['disk']['minute'] = "mms_data_disk_min";
 $테이블['disk']['hour'] = "mms_data_disk_hour";
 $테이블['disk']['day'] = "mms_data_disk_day";
 $테이블['disk']['month'] = "mms_data_disk_month";
@@ -92,33 +92,45 @@ else {
 }
 
 
+if($sdate) {
+	$기간조건 .= "		AND			M.m_date >=  '$sdate'	";
+}
+if($edate) {
+	$기간조건 .= "		AND			M.m_date <=  '$edate'	";
+}
+if(!$sdate && !$edate) {
+	$기간조건 .= "		AND			M.m_date >=  DATE_ADD( MDAY.m_date, INTERVAL -24 $timetype)	";
+}
+$추가조건 = $계정조건.$기간조건;
 
 
-//기본조건 셋팅
-if($timetype == 'min') {
-	$기간조건 = "	
-		AND			M.m_date >=  DATE_ADD( MDAY.m_date, INTERVAL -15 MINUTE)		
-	";
-	$추가조건 = $계정조건.$기간조건;
-}
-else if($timetype == 'hour') {
-	$기간조건 = "
-		AND			M.m_date >=  DATE_ADD( MDAY.m_date,INTERVAL -24 HOUR)
-	";
-	$추가조건 = $계정조건.$기간조건;
-}
-else if($timetype == 'day') {
-	$기간조건 = "
-		AND			M.m_date >=  DATE_ADD( MDAY.m_date,INTERVAL -10 DAY)
-	";
-	$추가조건 = $계정조건.$기간조건;
-}
-else if($timetype == 'month') {
-	$기간조건 = "
-		AND			M.m_date >=  DATE_ADD( MDAY.m_date,INTERVAL -12 MONTH)
-	";
-	$추가조건 = $계정조건.$기간조건;
-}
+
+////기본조건 셋팅
+//if($timetype == 'minute') {
+//
+//	if(!$sdate && !$edate) {
+//		$기간조건 .= "		AND			M.m_date <=  DATE_ADD( MDAY.m_date, INTERVAL -15 MINUTE)	";
+//	}
+//	$추가조건 = $계정조건.$기간조건;
+//}
+//else if($timetype == 'hour') {
+//	$기간조건 = "
+//		AND			M.m_date >=  DATE_ADD( MDAY.m_date,INTERVAL -20 HOUR)
+//	";
+//	$추가조건 = $계정조건.$기간조건;
+//}
+//else if($timetype == 'day') {
+//	$기간조건 = "
+//		AND			M.m_date >=  DATE_ADD( MDAY.m_date,INTERVAL -20 DAY)
+//	";
+//	$추가조건 = $계정조건.$기간조건;
+//}
+//else if($timetype == 'month') {
+//	$기간조건 = "
+//		AND			M.m_date >=  DATE_ADD( MDAY.m_date,INTERVAL -20 MONTH)
+//	";
+//	$추가조건 = $계정조건.$기간조건;
+//}
 
 //날짜선택시 검색 값셋팅
 //$추가조건 .= "	AND "; 
@@ -139,22 +151,10 @@ if($mode == 'cpu_report') {
 													M.reg_date,	/*서버에서 입력한 시간*/
 													M.D1,	/*Y좌표 값(측정수치) User*/
 													M.D1_MIN,	
-													M.D1_AVG,	
-													M.D2,	/*Y좌표 값(측정수치) Nice*/
-													M.D2_MIN,	
-													M.D2_AVG,	
-													M.D3,	/*Y좌표 값(측정수치) System*/
-													M.D3_MIN,	
-													M.D3_AVG,	
-													M.D4,	/*Y좌표 값(측정수치) Wait*/
-													M.D4_MIN,	
-													M.D4_AVG,	
-													M.D5,	/*Y좌표 값(측정수치) Steal*/
-													M.D5_MIN,	
-													M.D5_AVG,	
-													M.D6,	/*Y좌표 값(측정수치) Idle*/
-													M.D6_MIN,	
-													M.D6_AVG	
+													M.D1_AVG,													
+													M.D2 + M.D3 + M.D4 + M.D5 + M.D6 AS D2,
+													D2_MIN + D3_MIN + D4_MIN + D5_MIN + D6_MIN AS D2_MIN,
+													D2_AVG + D3_AVG + D4_AVG + D5_AVG + D6_AVG AS D2_AVG
 								FROM			$table M
 													LEFT JOIN (	SELECT	cluster_id,
 																							node_id,
@@ -293,7 +293,6 @@ $main_sql = "	$SELECT_SQL
 							LIMIT $start, $limit
 ";
 $ob = $sqli->query($main_sql);
-
 
 //echo $main_sql;
 

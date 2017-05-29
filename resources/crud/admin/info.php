@@ -21,8 +21,25 @@ $limit = ($limit) ? $limit : 50;
 
 $AND_SQL = "";
 
+$cluster_id = $_SESSION['cluster_id'];
+$mb_id = $_SESSION['mb_id'];
+
+
 /* 회원목록 */
 if($_GET['mode'] == 'MemberList') {
+	switch($_SESSION['mb_type']) {
+		case 'M00':	//관리자계정
+			break;
+		case 'M10':	//마스터계정
+			$AND_SQL = "	AND		MB.cluster_id = '$cluster_id'
+										AND		MB.mb_id != '$mb_id'		";
+			break;
+		default:		//
+			$AND_SQL = "	AND		MB.cluster_id = '$cluster_id'
+										AND		MB.mb_id = '$mb_id'			";
+			break;
+	}
+	
 	/* 노드 목록 추출 */
 	$SELECT_SQL = "	SELECT	MB.cluster_id,		/*그룹ID(계열사가 사용할 그룹ID, 소속회사명 보고 클러스터id 연결해줘야함)*/
 													MB.mb_company,		/*소속회사명(키값은 아님)*/
@@ -35,9 +52,12 @@ if($_GET['mode'] == 'MemberList') {
 													MB.reg_date,	
 													MC.cluster_name,	/*클러스터(그룹) 이름,   ex) 삼성*/
 													MC.api_key,				/*소프트레이어API 키*/
-													MC.api_id					/*소프트레이어API ID*/
+													MC.api_id,					/*소프트레이어API ID*/
+													MB.mb_type,
+													CD.code_name AS mb_type_name
 									FROM		mms_member MB
 													LEFT JOIN mms_cluster MC ON (MC.cluster_id = MB.cluster_id)
+													LEFT JOIN codes CD ON (CD.dbtable = 'mms_member' AND CD.col = 'mb_type' AND CD.code = MB.mb_type)
 									WHERE		1=1
 									$AND_SQL
 	";
@@ -61,7 +81,7 @@ else if($_GET['mode'] == 'NodeList') {
 
 $result = $sqli->query($SELECT_SQL);
 $total_count = $result->num_rows;
-$result->free();
+//$result->free();
 
 
 /* */
@@ -70,6 +90,8 @@ $main_sql = "	$SELECT_SQL
 							LIMIT $start, $limit
 ";
 $ob = $sqli->query($main_sql);
+
+
 
 
 while($row = $ob->fetch_array()) {

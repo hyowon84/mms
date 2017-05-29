@@ -19,6 +19,7 @@ if($mode == 'check') {
 	if($chk->num_rows > 0) {
 		$mb = $chk->fetch_array();
 		set_session('mb_id', $mb['mb_id']);
+		set_session('mb_type', $mb['mb_type']);
 		set_session('mb_name', $mb['mb_name']);
 		set_session('cluster_id', $mb['cluster_id']);
 		set_session('api_key', $mb['api_key']);
@@ -27,7 +28,8 @@ if($mode == 'check') {
 		alert('로그인 되었습니다','/');
 	}
 	else if($chk->num_rows == 0) {
-		alert('패스워드가 일치하지 않습니다');
+		alert('패스워드가 일치하지 않습니다','/');
+		
 	}
 	else {
 		alert('에러');

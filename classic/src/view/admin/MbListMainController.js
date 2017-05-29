@@ -1,4 +1,4 @@
-Ext.define('mms.view.admin.MbListMainController', {
+Ext.define('mms.view.admin.MbListMainController', {	//'mms.controller.admin.MbListMainController',
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.MbListMainController',
 	popup:{},
@@ -6,9 +6,16 @@ Ext.define('mms.view.admin.MbListMainController', {
 	/* 회원목록 그리드의 회원정보 작성 윈도우 열기 */
 	createWinMbInfo : function() {
 		var winMbInfo = Ext.ComponentQuery.query('[name=WinMbInfo]');
-
+	
+		
+		
 		if(winMbInfo.length > 0) {
-			winMbInfo[0].query('[name=FrmMemberInfo]');
+			if(myInfo.getAt(0).data.mb_type != 'M00') {
+				var fs = winMbInfo[0].query('[name=fs_cluster]');
+				winMbInfo[0].query('[name=cluster_id]')[0].setValue(myInfo.getAt(0).data.cluster_id);
+				fs[0].hide();				
+			}
+			
 			winMbInfo[0].show();
 		}
 		else {
@@ -17,10 +24,19 @@ Ext.define('mms.view.admin.MbListMainController', {
 				//name: v_menu.node_id,
 				//cluster_id: v_menu.cluster_id,
 				//node_id: v_menu.node_id,
+				height:440,
 				autoShow: true,
 				autoDestroy: true,
 				listeners: {
 					show: function (window) {
+						
+						if(myInfo.getAt(0).data.mb_type != 'M00') {
+							var fs = this.query('[name=fs_cluster]');
+							this.query('[name=cluster_id]')[0].setValue(myInfo.getAt(0).data.cluster_id);
+							fs[0].hide();
+							this.setHeight(390);
+						}
+						
 						//window.getEl().setOpacity(0);
 						//window.getEl().fadeIn({duration: 2000});
 					}
@@ -85,15 +101,22 @@ Ext.define('mms.view.admin.MbListMainController', {
 		});
 	},
 
-	onSelectChange:function(view, records){
-
-	},
-
 	calledByOther:function(param){
 			//this.popup = param;
 	},
 	onReturn:function(){
 			//this.popup.callbackPopup(this.lookupReference('userId').getValue());
 			this.getView().destroy();
+	},
+	onSelectChange :function(view, records) {
+		if(records.length > 0) {
+			var v_cluster_id = records[0].data.cluster_id;
+			var winMbInfo = Ext.ComponentQuery.query('[name=WinMbInfo]')[0];
+	
+			//윈도우 존재시 cluster_id 입력,
+			if(winMbInfo) {
+				winMbInfo.query('[name=cluster_id]')[0].setValue(v_cluster_id);
+			}
+		}
 	}
 });

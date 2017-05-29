@@ -1,8 +1,27 @@
+/* 콤보박스 */
+Ext.define('mms.view.combo.mb_type', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_mbtype',
+	queryMode: 'local',
+	editable: false,
+	displayField: 'name',
+	valueField: 'value',
+	name: 'mb_type',
+	value : 'M10',
+	fieldLabel: '계정유형',
+	store: {
+		type: 'mb_types'
+	},
+	labelWidth : 60,
+	width : 200
+});
+
 
 Ext.define('mms.view.admin.MbListMain', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.MbListMain',
 	requires:[
+		//'mms.controller.admin.MbListMainController',
 		'mms.view.admin.MbListMainController',
 		'mms.view.admin.GridClusterList',
 		'mms.view.admin.GridMemberList',

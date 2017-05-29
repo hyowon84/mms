@@ -1,4 +1,5 @@
 
+
 Ext.define('mms.view.admin.FrmMemberInfo', {
 	extend: 'Ext.form.Panel',
 	xtype: 'FrmMemberInfo',
@@ -26,6 +27,7 @@ Ext.define('mms.view.admin.FrmMemberInfo', {
 			items: [
 				{
 					xtype: 'fieldset',
+					name : 'fs_cluster',
 					title: '클러스터 연결정보',
 					layout: 'anchor',
 					defaultType: 'textfield',
@@ -45,6 +47,10 @@ Ext.define('mms.view.admin.FrmMemberInfo', {
 					defaultType: 'textfield',
 					margin: '10 0 10 0',
 					items: [
+						{
+							xtype : 'cb_mbtype',
+							width : 250
+						},
 						{
 							fieldLabel: '아이디',
 							name: 'mb_id',
@@ -115,6 +121,9 @@ Ext.define('mms.view.admin.FrmMemberInfo', {
 		}
 	]
 });
+
+
+
 
 Ext.define('mms.view.admin.WinMbInfo', {
 	extend: 'Ext.window.Window',

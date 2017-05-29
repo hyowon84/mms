@@ -58,18 +58,12 @@ Ext.define('mms.view.admin.FrmNodeInfo', {
 							allowBlank: false
 						},
 						{
-							fieldLabel: '노드 OS',
-							name: 'node_os',
-							width: 400,
-							emptyText: 'LINUX',
-							allowBlank: false
+							xtype : 'cb_nodeos'
+							// O/S
 						},
 						{
-							fieldLabel: '노드 유형(VM or BM)',
-							name: 'node_type',
-							width: 400,
-							emptyText: 'VM',
-							allowBlank: false
+							xtype : 'cb_nodetype'
+							// 클라우드 유형
 						},
 						{
 							fieldLabel: '매니저IP',
