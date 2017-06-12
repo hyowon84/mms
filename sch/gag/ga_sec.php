@@ -43,7 +43,7 @@ $노드ID = ($node_id) ? " AND			MG.node_id = '$node_id' " : "";
 $GR_SQL = " SELECT	MG.*
 						FROM		mms_node MG
 						WHERE		1=1
-						AND			MG.node_os = 'LINUX'
+						AND			MG.node_os = 'O00'
 						$노드ID
 						ORDER BY MG.upd_date ASC
 ";

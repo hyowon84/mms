@@ -12,11 +12,14 @@ include("NagiosJSON.php");
 	<meta charset="UTF-8">
 </head>
 
+
+
 <?
+
 /*업데이트 늦은 순서부터*/
 $NODE_SQL = "	SELECT	*
 							FROM		mms_node M
-							WHERE		M.node_os = 'WINDOW'
+							WHERE		M.node_os = 'O10'
 							ORDER BY M.upd_date ASC
 ";
 $node = $sqli->query($NODE_SQL);

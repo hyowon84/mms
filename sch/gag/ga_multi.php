@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 $GR_SQL = " SELECT	MG.*
 						FROM		mms_node MG
-						WHERE		MG.node_os = 'LINUX'
+						WHERE		MG.node_os = 'O00'
 						ORDER BY MG.upd_date ASC
 ";
 $gr_result = $sqli->query($GR_SQL);
