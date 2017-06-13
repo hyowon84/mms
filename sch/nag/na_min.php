@@ -84,6 +84,7 @@ while($row = $node->fetch_array()) {
 	$REQ1 = new NagiosJSON('url', "http://$IP주소/nagios/cgi-bin/statusjson.cgi?query=service&hostname=$노드ID&servicedescription=CPU+Load");
 	$REQ1->setAuthentification('nagiosadmin', 'nagios');
 	$CPU = $REQ1->getJSONfromURL();
+	
 	//echo date("Y-m-d H:i:s", substr($CPU[result][query_time],0,10))."<BR>"; //쿼리타임
 	//echo date("Y-m-d H:i:s", substr($CPU[result][program_start],0,10))."<BR>";	//프로그램 시작
 	//echo date("Y-m-d H:i:s", substr($CPU[result][last_data_update],0,10))."<BR>";	//마지막 업데이트
@@ -125,6 +126,19 @@ while($row = $node->fetch_array()) {
 																	D1 = '$val_y1',
 																	D1_MIN = '$val_y1',
 																	D1_AVG = '$val_y1',
+																	
+																	D2 = '0',
+																	D2_MIN = '0',
+																	D2_AVG = '0',
+																	D3 = '0',
+																	D3_MIN = '0',
+																	D3_AVG = '0',
+																	D4 = '0',
+																	D4_MIN = '0',
+																	D4_AVG = '0',
+																	D5 = '0',
+																	D5_MIN = '0',
+																	D5_AVG = '0',
 																	
 																	D6 = '$val_y6',
 																	D6_MIN = '$val_y6',
@@ -179,6 +193,16 @@ while($row = $node->fetch_array()) {
 																	D1 = '$val_y1',
 																	D1_MIN = '$val_y1',
 																	D1_AVG = '$val_y1',
+																	
+																	D2 = '0',
+																	D2_MIN = '0',
+																	D2_AVG = '0',
+																	D3 = '0',
+																	D3_MIN = '0',
+																	D3_AVG = '0',
+																	D4 = '0',
+																	D4_MIN = '0',
+																	D4_AVG = '0',
 																	
 																	D5 = '$val_y5',
 																	D5_MIN = '$val_y5',
