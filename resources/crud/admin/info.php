@@ -52,7 +52,7 @@ if($_GET['mode'] == 'MemberList') {
 													MB.reg_date,	
 													MC.cluster_name,	/*클러스터(그룹) 이름,   ex) 삼성*/
 													MC.api_key,				/*소프트레이어API 키*/
-													MC.api_id,					/*소프트레이어API ID*/
+													MC.api_id,				/*소프트레이어API ID*/
 													MB.mb_type,
 													CD.code_name AS mb_type_name
 									FROM		mms_member MB
@@ -72,8 +72,9 @@ else if($_GET['mode'] == 'ClusterList') {
 }
 else if($_GET['mode'] == 'NodeList') {
 	/* 노드 목록 추출 */
-	$SELECT_SQL = "	SELECT	*
-									FROM		mms_node
+	$SELECT_SQL = "	SELECT	MN.*
+									FROM		mms_node MN
+													LEFT JOIN codes OS ON (OS.dbtable = 'mms_node' AND OS.col = 'node_os' AND OS.code = MN.node_os)
 									WHERE		1=1
 									$AND_SQL
 	";
@@ -90,8 +91,6 @@ $main_sql = "	$SELECT_SQL
 							LIMIT $start, $limit
 ";
 $ob = $sqli->query($main_sql);
-
-
 
 
 while($row = $ob->fetch_array()) {

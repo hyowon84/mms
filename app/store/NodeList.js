@@ -12,6 +12,12 @@ Ext.define('mms.store.NodeList', {
 		{ name : 'manager_ip',   type : 'string' },
 		{ name : 'node_ip',      type : 'string' },
 		{ name : 'node_level',   type : 'string' },
+		{ name : 'sms_cpu_w', 	 type : 'bool' },
+		{ name : 'sms_cpu_c', 	 type : 'bool' },
+		{ name : 'sms_cpu_f', 	 type : 'bool' },
+		{ name : 'sms_memory_w', type : 'bool' },
+		{ name : 'sms_memory_c', type : 'bool' },
+		{ name : 'sms_memory_f', type : 'bool' },		
 		{ name : 'upd_date',     type : 'date' },
 		{ name : 'reg_date',		 type : 'date' }
 	],
@@ -73,3 +79,15 @@ Ext.define('mms.store.node_type', {
 	]
 });
 
+/* 알람 레벨 */
+Ext.define('mms.store.alert_level', {
+	extend: 'Ext.data.ArrayStore',
+	//extend: 'Ext.data.Store',
+	model: 'mms.model.comboDefault',
+	alias: 'store.alert_level',
+	data: [
+		['WARNING(70~80%)',70],
+		['CRITICAL(80~90%)',80],
+		['FATAL(90~100%)',90]
+	]
+});

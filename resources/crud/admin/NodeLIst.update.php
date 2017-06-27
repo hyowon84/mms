@@ -15,27 +15,38 @@ function process($data) {
 	
 	$cluster_id = $data['cluster_id'];
 	$node_id = $data['node_id'];
+
 	$node_name = $data['node_name'];
 	$node_os = $data['node_os'];
 	$node_type = $data['node_type'];
 	$manager_ip = $data['manager_ip'];
 	$node_ip = $data['node_ip'];
 	$node_level = $data['node_level'];
-
 	/* 회원정보 수정 */
+	/*
+			cluster_id : 노드를 묶는 단위
+			node_name : 노드별칭
+			node_os : 노드의 OS ( LINUX, WINDOW )
+			node_type : 노드의 유형 VM(Virtual Machine), BM(Baremetal)
+			manager_ip : 소속된 매니저서버의 IP(노드IP주소가 아님)
+			node_ip : 노드IP 주소
+			node_level : 그룹 등급
+			upd_date : 갱신일
+	*/
+	foreach($data AS $key => $val) {
+		if(strlen($key) > 3 && strlen($val) >= 0 && !strstr($key,'date') )
+			$컬럼조합 .= " {$key} = '$val', ";
+	}
+	
 	$common_sql = "	UPDATE	mms_node	SET
-														cluster_id = '$cluster_id',	/*노드를 묶는 단위*/
-														node_name = '$node_name',	/*노드별칭*/
-														node_os = '$node_os',	/*노드의 OS ( LINUX, WINDOW )*/
-														node_type = '$node_type',	/*노드의 유형 VM(Virtual Machine), BM(Baremetal)*/
-														manager_ip = '$manager_ip',	/*소속된 매니저서버의 IP(노드IP주소가 아님)*/
-														node_ip = '$node_ip',	/*노드IP 주소*/
-														node_level = '$node_level',	/*그룹 등급*/
+														$컬럼조합
 														upd_date = NOW()
 									WHERE		cluster_id = '$cluster_id'
 									AND			node_id = '$node_id' 
 	";
+	
 	$result = $sqli->query($common_sql);
+	
 	return $result;
 }
 

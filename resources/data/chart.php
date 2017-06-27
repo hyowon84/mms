@@ -258,9 +258,10 @@ else if($mode == 'node_summary') {
 
 	$클러스터ID조건 = ($mb_id == 'admin') ? "" : "AND		MN.cluster_id = '$cluster_id'"; 
 	
-	$SELECT_SQL = "	SELECT	CONCAT(MN.node_os,'(',MN.node_type,')') AS TITLE,
+	$SELECT_SQL = "	SELECT	CONCAT(OS.code_name,'(',MN.node_type,')') AS TITLE,
 													COUNT(*) AS VAL
 									FROM		mms_node MN
+													LEFT JOIN codes OS ON (OS.dbtable = 'mms_node' AND OS.col = 'node_os' AND OS.code = MN.node_os)
 									WHERE		1=1
 									$클러스터ID조건
 									GROUP BY MN.cluster_id, MN.node_os, MN.node_type

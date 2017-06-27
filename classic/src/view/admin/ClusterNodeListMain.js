@@ -1,4 +1,4 @@
-/* 콤보박스 */
+/* 콤보박스 노드OS */
 Ext.define('mms.view.combo.node_os', {
 	extend: 'Ext.form.ComboBox',
 	alias: 'widget.cb_nodeos',
@@ -7,8 +7,7 @@ Ext.define('mms.view.combo.node_os', {
 	displayField: 'name',
 	valueField: 'value',
 	name: 'node_os',
-	value : 'LINUX',
-	fieldLabel: 'O/S',
+	value : 'O00',
 	store: {
 		type: 'node_os'
 	},
@@ -16,7 +15,7 @@ Ext.define('mms.view.combo.node_os', {
 });
 
 
-/* 콤보박스 */
+/* 콤보박스 노드유형*/
 Ext.define('mms.view.combo.node_type', {
 	extend: 'Ext.form.ComboBox',
 	alias: 'widget.cb_nodetype',
@@ -26,12 +25,29 @@ Ext.define('mms.view.combo.node_type', {
 	valueField: 'value',
 	name: 'node_type',
 	value : 'VM',
-	fieldLabel: '유형',
 	store: {
 		type: 'node_type'
 	},
 	width : 250
 });
+
+/* 콤보박스 알람레벨 */
+Ext.define('mms.view.combo.alert_level', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_alertlevel',
+	queryMode: 'local',
+	editable: false,
+	displayField: 'name',
+	valueField: 'value',
+	name: 'alert_level',
+	value : 70,
+	store: {
+		type: 'alert_level'
+	},
+	width : 250
+});
+
+
 
 
 Ext.define('mms.view.admin.ClusterNodeListMain', {

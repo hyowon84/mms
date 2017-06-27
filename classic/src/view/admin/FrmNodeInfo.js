@@ -58,11 +58,13 @@ Ext.define('mms.view.admin.FrmNodeInfo', {
 							allowBlank: false
 						},
 						{
-							xtype : 'cb_nodeos'
+							xtype : 'cb_nodeos',
+							fieldLabel: 'O/S'
 							// O/S
 						},
 						{
-							xtype : 'cb_nodetype'
+							xtype : 'cb_nodetype',
+							fieldLabel: '유형'
 							// 클라우드 유형
 						},
 						{

@@ -25,8 +25,9 @@ if($mb_id == 'admin') {
 	}
 <?
 } //if end (관리자)
-// M10 마스터계정
-else if($mb_type == 'M10') {
+
+// 모니터링 메뉴는 (M10 마스터계정, M20 일반계정) 공통
+else if($mb_type == 'M10' || $mb_type == 'M20') {
 	$node_sql = "	SELECT	MN.*
 								FROM		mms_node MN
 								WHERE		MN.cluster_id = '$cluster_id'							
@@ -110,16 +111,37 @@ else if($mb_type == 'M10') {
 			url: "mms.view.report.Main",
 			leaf: true
 		},
+	<?
+	if($mb_type == 'M10') {	//마스터
+	?>
 		{
 			name: "계정 관리 ",
 			url: "mms.view.master.MbListMain",
 			leaf: true
 		},
 		{
+			name: "노드 관리",
+			url: "mms.view.master.NodeAlertMain",
+			leaf: true
+		},
+		{
 			name: "정보수정",
 			url: "mms.view.info.ClusterInfoMain",
 			leaf: true
-    }
+		}
+	<?
+	}
+	else if($mb_type == 'M20') {	//일반계정
+	?>
+		{
+			name: "정보수정",
+			url: "mms.view.info.ClusterInfoMain",
+			leaf: true
+		}
+	<?
+	}
+	?>	
+		
 	]
 }
 <?

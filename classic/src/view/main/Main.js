@@ -4,7 +4,7 @@ Ext.define('mms.view.main.Main', {
 	extend: 'Ext.container.Container',
 	requires:[
 		'mms.store.mbInfo',
-		'mms.view.menu.LeftMenu'		
+		'mms.view.menu.LeftMenu'
 	],
 	xtype: 'main',
 	controller:'main',
