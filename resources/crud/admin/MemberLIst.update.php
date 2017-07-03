@@ -1,5 +1,6 @@
 <?php
 include_once('./_common.php');
+//대소문자변경5
 
 
 //스트립슬래시를 안하면 json_decode가 안됨
@@ -23,6 +24,7 @@ $arr = json_decode($data,true);
 //echo iconv("EUC-KR", "UTF-8",  $arr[mb_name]);
 //$arr[mb_name] = iconv("EUC-KR", "UTF-8",  $arr[mb_name]);
 //echo iconv('utf-8', 'euc-kr',  $arr[mb_name]);
+
 
 
 function process($data) {

@@ -1,5 +1,7 @@
 <?php
 include_once('./_common.php');
+//대소문자변경7
+
 
 
 //스트립슬래시를 안하면 json_decode가 안됨
@@ -7,6 +9,7 @@ include_once('./_common.php');
 //print_r($data['data']);
 $data = iconv('euc-kr', 'utf-8', $_POST['data']);
 $arr = json_decode($data,true);
+
 
 
 

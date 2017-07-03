@@ -1,6 +1,9 @@
 <?php
 include_once('./_common.php');
 
+//대소문자 변경3
+
+
 
 //스트립슬래시를 안하면 json_decode가 안됨
 

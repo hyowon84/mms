@@ -1,8 +1,11 @@
 <?php
 include_once('./_common.php');
+//대소문자변경6
+
 
 $data = iconv('euc-kr', 'utf-8', $_POST['data']);
 $arr = json_decode($data,true);
+
 
 
 function process($data) {

@@ -1,6 +1,6 @@
 <?php
 include_once('./_common.php');
-
+//대소문자변경4
 
 //스트립슬래시를 안하면 json_decode가 안됨
 $data = iconv('euc-kr', 'utf-8', $_POST['data']);
@@ -21,6 +21,7 @@ function process($data) {
 	
 	return $sqli->query($common_sql);
 }
+
 
 /* 단일레코드일때 */
 if( strlen($arr[mb_id]) > 2 ) {
