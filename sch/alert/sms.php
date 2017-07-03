@@ -102,11 +102,11 @@ for($i=0; $i < count($SRC); $i++) {
 
 		while ($row = $ob->fetch_assoc()) {
 			if ( $row[$SRC_NAME[$i].'_F'])
-				$메시지 = $row[node_id]. "노드의 {$SRC_NAME[$i]}사용률" . $row[AVG_D1] . "% FATAL -미르헨지-";
+				$메시지 = $row[node_id]. "노드의 {$SRC_NAME[$i]}사용률" . $row[AVG_D1] . "% FATAL -미르헨지MMS-";
 			else if ($row[$SRC_NAME[$i].'_C'])
-				$메시지 = $row[node_id]. "노드의 {$SRC_NAME[$i]}사용률" . $row[AVG_D1] . "% CRITICAL -미르헨지-";
+				$메시지 = $row[node_id]. "노드의 {$SRC_NAME[$i]}사용률" . $row[AVG_D1] . "% CRITICAL -미르헨지MMS-";
 			else if ($row[$SRC_NAME[$i].'_W'])
-				$메시지 = $row[node_id]. "노드의 {$SRC_NAME[$i]}사용률" . $row[AVG_D1] . "% WARNING -미르헨지-";
+				$메시지 = $row[node_id]. "노드의 {$SRC_NAME[$i]}사용률" . $row[AVG_D1] . "% WARNING -미르헨지MMS-";
 
 
 			//고객사 연락처 정보 한번만 가져오게 로딩 이력 확인
