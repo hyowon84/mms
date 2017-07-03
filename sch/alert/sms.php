@@ -134,7 +134,8 @@ for($i=0; $i < count($SRC); $i++) {
 																			TR_MSG = '$메시지'
 				";
 				//			$sqli->query($INS_SQL);
-				echo $INS_SQL . "<br>";
+				$sqli->query($INS_SQL);
+				echo $메시지."<br>";
 			}
 
 		}
