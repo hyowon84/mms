@@ -61,7 +61,7 @@ for($i=0; $i < count($SRC); $i++) {
 												) ";
 		}
 
-		$SRC_SQL = "SELECT	T.*					
+		$SRC_SQL = "	SELECT	T.*					
 									FROM		(	SELECT	MDC.cluster_id,
 																		MDC.node_id,
 																		AVG(MDC.D1) AS AVG_D1,
@@ -84,7 +84,7 @@ for($i=0; $i < count($SRC); $i++) {
 														WHERE		1=1
 														AND			MDC.m_date <= M.MAX_DATE
 														AND			MDC.m_date >= DATE_ADD( M.MAX_DATE, INTERVAL -5 MINUTE)
-								
+														AND			DATE_ADD( NOW(), INTERVAL -30 MINUTE) > MN.sms_date 
 														AND			(MDC.cluster_id,MDC.node_id) NOT IN (	SELECT	MET.cluster_id,
 																																									MET.node_id
 																																					FROM		mms_except_time MET
@@ -133,8 +133,14 @@ for($i=0; $i < count($SRC); $i++) {
 																			TR_CALLBACK = '027825003',
 																			TR_MSG = '$메시지'
 				";
-				//			$sqli->query($INS_SQL);
 				$sqli->query($INS_SQL);
+
+				$UPD_SQL = "UPDATE		mms_node	SET
+																sms_date = NOW()
+										WHERE			cluster_id = '$row[cluster_id]'
+										AND				node_id = '$row[node_id]'
+				";
+				$sqli->query($UPD_SQL);
 				echo $메시지."<br>";
 			}
 
