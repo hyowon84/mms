@@ -3,10 +3,13 @@ Ext.define('mms.view.master.NodeAlertMain', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.NodeAlertMain',
 	requires:[
+		'mms.view.master.GridNodeAlertList',
 		'mms.view.master.NodeAlertMainController',
 		'mms.store.NodeList',
 		'mms.store.mbInfo',
-		'mms.view.master.GridNodeAlertList'
+		'mms.store.MemberList',
+		'mms.view.admin.GridClusterList',
+		'mms.view.master.GridMemberListB'
 	],
 	controller:'NodeAlertMainController',
 	xtype: 'layout-horizontal-box',
