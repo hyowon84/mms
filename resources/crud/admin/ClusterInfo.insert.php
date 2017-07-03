@@ -1,6 +1,6 @@
 <?php
 include_once('./_common.php');
-
+//대소문자변경1
 
 function process($_POST) {
 	global $sqli;
