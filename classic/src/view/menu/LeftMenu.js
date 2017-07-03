@@ -18,7 +18,7 @@ Ext.define('mms.view.menu.LeftMenu', {
 		fields:['name', 'url'],
 		proxy:{
 			type:'ajax',
-			url:'./resources/data/LeftMenu.php',
+			url:'/resources/data/LeftMenu.php',
 			reader:{
 				type:'json'
 			}

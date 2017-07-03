@@ -30,13 +30,10 @@ $sqli->query("DELETE FROM mms_data_memory WHERE		m_date <= DATE_ADD(NOW(),INTERV
 $sqli->query("DELETE FROM mms_data_disk WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
 $sqli->query("DELETE FROM mms_data_network WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
 
-
-//$sqli->query("DELETE FROM mms_data_cpu WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-//$sqli->query("DELETE FROM mms_data_memory WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-//$sqli->query("DELETE FROM mms_data_disk WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-//$sqli->query("DELETE FROM mms_data_network WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -3 HOUR)");
-
-
+$sqli->query("DELETE FROM mms_data_cpu_min WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -2 MONTH)");
+$sqli->query("DELETE FROM mms_data_memory_min WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -2 MONTH)");
+$sqli->query("DELETE FROM mms_data_disk_min WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -2 MONTH)");
+$sqli->query("DELETE FROM mms_data_network_min WHERE		m_date <= DATE_ADD(NOW(),INTERVAL -2 MONTH)");
 
 //$LOCKING_TB = "LOCK TABLES mms_data_cpu WRITE;
 //							LOCK TABLES mms_data_memory WRITE;

@@ -120,10 +120,10 @@ else if($mb_type == 'M10' || $mb_type == 'M20') {
 			leaf: true
 		},
 		{
-			name: "노드 관리",
+			name: "노드&알람 설정",
 			url: "mms.view.master.NodeAlertMain",
 			leaf: true
-		},
+		},		
 		{
 			name: "정보수정",
 			url: "mms.view.info.ClusterInfoMain",

@@ -55,6 +55,55 @@ Ext.define('mms.store.NodeList', {
 });
 
 
+/* SMS알람 제외시간 정보 */
+Ext.define('mms.store.ExceptTimeList', {
+	extend: 'Ext.data.Store',
+	alias: 'store.ExceptTimeList',
+	storeId: 'ExceptTimeList',
+	fields : [
+		{ name : 'cluster_id',	type : 'string' },
+		{ name : 'node_id',			type : 'string' },
+		{ name : 'no',	type : 'string' },
+		{ name : 'ec_sdate',		type : 'date' },
+		{ name : 'ec_edate',		type : 'date' },
+		{ name : 'ec_memo',			type : 'string' },
+		{ name : 'reg_date',		type : 'date' }
+	],
+	pageSize : 50,
+	autoLoad : true,
+	remoteSort: true,
+	autoSync : true,
+	sorters:[
+		{
+			property:'ec_edate',
+			direction:'DESC'
+		}
+	],
+	proxy : {
+		type : 'ajax',
+		extraParams : {
+
+		},
+		api : {
+			read : '/resources/crud/master/info.php?mode=ExceptTimeList',
+			create : '/resources/crud/master/ExceptTimeList.insert.php',
+			update : '/resources/crud/master/ExceptTimeList.update.php',
+			destroy : '/resources/crud/master/ExceptTimeList.delete.php'
+		},
+		reader : {
+			rootProperty : 'data',
+			totalProperty : 'total'
+		},
+		writer : {
+			type : 'json',
+			writeAllFields : true,
+			encode : true,
+			rootProperty : 'data'
+		}
+	}
+});
+
+
 /*노드 OS */
 Ext.define('mms.store.node_os', {
 	extend: 'Ext.data.ArrayStore',

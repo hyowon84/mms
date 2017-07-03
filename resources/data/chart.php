@@ -177,12 +177,12 @@ else if ($mode == 'mem_report') {
 													M.mdate,
 													M.m_date,	/*유닉스타임 -> 날짜변환*/
 													M.reg_date,	/*서버에서 입력한 시간*/
-													M.D1 + D2 + D3 + D4 + D6 AS D1,
-													M.D1_MIN + D2_MIN + D3_MIN + D4_MIN + D6_MIN AS D1_MIN,
-													M.D1_AVG + D2_AVG + D3_AVG + D4_AVG + D6_AVG AS D1_AVG,
-													M.D5 AS D2,
-													M.D5_MIN AS D2_MIN,
-													M.D5_AVG AS D2_AVG
+													IFNULL(M.D1,0) + IFNULL(D2,0) + IFNULL(D3,0) + IFNULL(D4,0) + IFNULL(D6,0) AS D1,
+													IFNULL(M.D1_MIN,0) + IFNULL(D2_MIN,0) + IFNULL(D3_MIN,0) + IFNULL(D4_MIN,0) + IFNULL(D6_MIN,0) AS D1_MIN,
+													IFNULL(M.D1_AVG,0) + IFNULL(D2_AVG,0) + IFNULL(D3_AVG,0) + IFNULL(D4_AVG,0) + IFNULL(D6_AVG,0) AS D1_AVG,
+													IFNULL(M.D5,0) AS D2,
+													IFNULL(M.D5_MIN,0) AS D2_MIN,
+													IFNULL(M.D5_AVG,0) AS D2_AVG
 								FROM			$table M
 													LEFT JOIN (	SELECT	cluster_id,
 																							node_id,

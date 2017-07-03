@@ -41,7 +41,13 @@ Ext.define('mms.view.master.NodeAlertMain', {
 					title : '노드목록',
 					width : '100%',
 					height:500
-				}				
+				},
+				{
+					xtype: 'GridExceptTimeList',
+					title : '알람제외시간',
+					width : '100%',
+					height:300
+				}	
 			]
 		}
 	]

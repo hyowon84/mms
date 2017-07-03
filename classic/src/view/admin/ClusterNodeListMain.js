@@ -1,4 +1,20 @@
 /* 콤보박스 노드OS */
+
+Ext.define('mms.view.combo.NodeList', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_NodeList',
+	//queryMode: 'local',
+	editable: false,
+	displayField: 'node_name',
+	valueField: 'node_id',
+	name: 'node_id',
+	store: {
+		type: 'NodeList'
+	},
+	width : 250	
+});
+
+
 Ext.define('mms.view.combo.node_os', {
 	extend: 'Ext.form.ComboBox',
 	alias: 'widget.cb_nodeos',
