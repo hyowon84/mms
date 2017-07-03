@@ -5,7 +5,8 @@ Ext.define('mms.view.master.NodeAlertMain', {
 	requires:[
 		'mms.view.master.NodeAlertMainController',
 		'mms.store.NodeList',
-		'mms.store.mbInfo'
+		'mms.store.mbInfo',
+		'mms.view.master.GridNodeAlertList'
 	],
 	controller:'NodeAlertMainController',
 	xtype: 'layout-horizontal-box',

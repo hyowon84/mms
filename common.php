@@ -89,7 +89,8 @@ function jsonDecode($DATA) {
 	 * 2. 넘겨받은 JSON텍스트 ICONV로 변환필요
 	 * 3. STRIPSLASH
 	 * */
-	$JSON소스 = stripslashes( str_replace('\"','"', iconv('utf-8', 'euc-kr',  $DATA) ) );
+
+	$JSON소스 = stripslashes( str_replace('\"','"', iconv('euc-kr', 'utf-8',  $DATA) ) );
 	return json_decode($JSON소스,true);
 }
 

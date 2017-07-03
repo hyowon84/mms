@@ -72,7 +72,22 @@ checkLogin();
 
 		return Ext.String.format(template, formatValue);
 	}
-	
+
+	/*그리드 컬럼 렌더러 - 콤보박스*/
+	function rendererCombo(value,metaData,record) {
+
+		var combo = metaData.column.getEditor();
+		combo.allowBlank = true;
+
+		if(value && combo && combo.store && combo.displayField){
+			var index = combo.store.findExact(combo.valueField, value);
+			if(index >= 0){
+				return combo.store.getAt(index).get(combo.displayField);
+			}
+		}
+		return (value) ? value : '' ;
+	}
+
 </script>
 
 <script type="text/javascript">
