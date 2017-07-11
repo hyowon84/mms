@@ -1,5 +1,10 @@
 @CHARSET "EUC-KR";
 
+
+/*트리구조 강제로 좌측 정렬*/
+.x-grid-cell-inner.x-grid-cell-inner-treecolumn {    text-align: left !important;}
+
+
 /* 버튼에 쓰이는 아이콘 */
 .icon-user { background-image: url(/resources/images/icons/user.png) !important; }
 .icon-add { background-image: url(/resources/images/icons/add.png) !important; }
@@ -32,3 +37,4 @@
 .grid_icon_edit1:before { content: url(/resources/images/icons/comment_edit.png); float:left; margin:5px; }
 
 .font_edit { margin-left:2px; color:blue; font-weight:bold; }
+

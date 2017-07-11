@@ -60,11 +60,11 @@ $테이블['cpu']['day'] = "mms_data_cpu_day";
 $테이블['cpu']['month'] = "mms_data_cpu_month";
 $테이블['cpu']['year'] = "mms_data_cpu_year";
 
-$테이블['memory']['minute'] = "mms_data_memory_min";
-$테이블['memory']['hour'] = "mms_data_memory_hour";
-$테이블['memory']['day'] = "mms_data_memory_day";
-$테이블['memory']['month'] = "mms_data_memory_month";
-$테이블['memory']['year'] = "mms_data_memory_year";
+$테이블['memory']['minute'] = "v_mms_data_memory_min_per";
+$테이블['memory']['hour'] = "v_mms_data_memory_hour_per";
+$테이블['memory']['day'] = "v_mms_data_memory_day_per";
+$테이블['memory']['month'] = "v_mms_data_memory_month_per";
+$테이블['memory']['year'] = "mms_data_memory_year_per";
 
 $테이블['network']['minute'] = "mms_data_network_min";
 $테이블['network']['hour'] = "mms_data_network_hour";
@@ -177,12 +177,8 @@ else if ($mode == 'mem_report') {
 													M.mdate,
 													M.m_date,	/*유닉스타임 -> 날짜변환*/
 													M.reg_date,	/*서버에서 입력한 시간*/
-													IFNULL(M.D1,0) + IFNULL(D2,0) + IFNULL(D3,0) + IFNULL(D4,0) + IFNULL(D6,0) AS D1,
-													IFNULL(M.D1_MIN,0) + IFNULL(D2_MIN,0) + IFNULL(D3_MIN,0) + IFNULL(D4_MIN,0) + IFNULL(D6_MIN,0) AS D1_MIN,
-													IFNULL(M.D1_AVG,0) + IFNULL(D2_AVG,0) + IFNULL(D3_AVG,0) + IFNULL(D4_AVG,0) + IFNULL(D6_AVG,0) AS D1_AVG,
-													IFNULL(M.D5,0) AS D2,
-													IFNULL(M.D5_MIN,0) AS D2_MIN,
-													IFNULL(M.D5_AVG,0) AS D2_AVG
+													IFNULL(M.D1,0) AS D1,
+													100 - IFNULL(M.D1,0) AS D2
 								FROM			$table M
 													LEFT JOIN (	SELECT	cluster_id,
 																							node_id,
@@ -193,7 +189,6 @@ else if ($mode == 'mem_report') {
 								WHERE		1=1
 								$추가조건
 	";
-	
 }
 
 //네트워크 사용량
