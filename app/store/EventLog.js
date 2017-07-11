@@ -1,5 +1,6 @@
 Ext.define('mms.store.EventLog', {
 	extend: 'Ext.data.Store',
+	model : 'mms.model.EventLog',
 	alias: 'store.EventLog',
 	storeId: 'EventLog',
 	pageSize : 50,
@@ -35,6 +36,7 @@ Ext.define('mms.store.EventLog', {
 
 Ext.define('mms.store.NotiLog', {
 	extend: 'Ext.data.Store',
+	model : 'mms.model.NotiLog',
 	alias: 'store.NotiLog',
 	storeId: 'NotiLog',
 	pageSize : 50,

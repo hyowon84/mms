@@ -55,9 +55,12 @@ Ext.define('mms.store.LoadReport', {
 Ext.define('mms.store.CpuReport', {
 	extend: 'Ext.data.Store',
 	alias: 'store.CpuReport',
-	fields: ['m_date','mdate','D1','D2','D3','D4','D5','D6'],
+	fields: ['m_date','mdate','D1','D2'],
 	autoLoad : false,
 	remoteSort: true,
+	config: {
+		numRecords: 10
+	},
 	sorters:[
 		{
 			property:'m_date',
@@ -69,7 +72,8 @@ Ext.define('mms.store.CpuReport', {
 		extraParams : {
 		},
 		api : {
-			read	: './resources/data/chart.php?mode=cpu_report'
+			//read	: './resources/data/chart.php?mode=cpu_report'
+			read	: './resources/data/chart.php?mode=cpu_report&timetype=day&cluster_id=ssoh&node_id=winserver2'
 		},
 		reader : {
 			rootProperty : 'data',
@@ -97,7 +101,8 @@ Ext.define('mms.store.MemReport', {
 		extraParams : {
 		},
 		api : {
-			read	: './resources/data/chart.php?mode=mem_report'
+			//read	: './resources/data/chart.php?mode=mem_report'
+			read	: './resources/data/chart.php?mode=mem_report&timetype=day&cluster_id=ssoh&node_id=winserver2'
 		},
 		reader : {
 			rootProperty : 'data',
@@ -165,6 +170,7 @@ Ext.define('mms.store.DiskReport', {
 /* 노드 OS 사용률 */
 Ext.define('mms.store.NodeSummary', {
 	extend: 'Ext.data.Store',
+	model : 'mms.model.NodeSummary',
 	alias: 'store.NodeSummary',
 	fields: ['node_os','node_cnt'],
 	autoLoad : true,

@@ -1,6 +1,7 @@
 
 Ext.define('mms.store.NodeList', {
 	extend: 'Ext.data.Store',
+	model : 'mms.model.NodeList',
 	alias: 'store.NodeList',
 	storeId: 'NodeList',
 	fields : [
@@ -58,6 +59,7 @@ Ext.define('mms.store.NodeList', {
 /* SMS알람 제외시간 정보 */
 Ext.define('mms.store.ExceptTimeList', {
 	extend: 'Ext.data.Store',
+	model : 'mms.model.ExceptTimeList',
 	alias: 'store.ExceptTimeList',
 	storeId: 'ExceptTimeList',
 	fields : [

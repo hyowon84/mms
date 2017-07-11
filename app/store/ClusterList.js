@@ -1,6 +1,7 @@
 
 Ext.define('mms.store.ClusterList', {
 	extend: 'Ext.data.Store',
+	model : 'mms.model.ClusterList',
 	alias: 'store.ClusterList',
 	storeId: 'ClusterList',
 	pageSize : 50,
