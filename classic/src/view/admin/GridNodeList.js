@@ -28,10 +28,11 @@ Ext.define('mms.view.admin.GridNodeList',{
 		Ext.apply(this, {
 			store: store,
 			plugins: [this.cellEditing],
-			viewConfig: {
+			/*viewConfig: {
 				stripeRows: true,
-				getRowClass: function(record, index) {}
-			},
+				//getRowClass: orderStatsColorSetting,
+				enableTextSelection: true
+			},*/
 			autoWidth : true,
 			columns : [
 				{ text : '클러스터ID',		width : 120,		dataIndex : 'cluster_id',		align:'left'	},

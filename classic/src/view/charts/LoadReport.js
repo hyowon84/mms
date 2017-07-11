@@ -4,7 +4,6 @@ Ext.define('mms.view.charts.LoadReport', {
 	extend: 'Ext.panel.Panel',
 	alias:'widget.chart_LoadReport',
 	controller:'ChartsController',
-	xtype: 'line-marked',	
 	layout : 'fit',
 	items : [
 		{
@@ -579,7 +578,6 @@ Ext.define('mms.view.charts.DynamicChartMemoryUse', {
 	extend: 'Ext.panel.Panel',
 	alias:'widget.DynamicChartMemoryUse',
 	controller:'ChartsController',
-	xtype: 'line-marked',
 	layout : 'fit',
 	items : [
 		{

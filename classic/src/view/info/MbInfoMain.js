@@ -5,7 +5,7 @@ Ext.define('mms.view.info.MbInfoMain', {
 	requires:[
 		'mms.view.info.MainController',
 		'mms.store.MemberList',
-		'mms.store.mbInfo'
+		'mms.store.mbinfo'
 	],
 	controller:'infoMain',
 	xtype: 'layout-horizontal-box',

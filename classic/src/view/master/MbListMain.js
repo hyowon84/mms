@@ -8,7 +8,7 @@ Ext.define('mms.view.master.MbListMain', {
 		'mms.view.master.GridMemberListB',
 		'mms.view.admin.FrmMemberInfo',
 		'mms.store.MemberList',
-		'mms.store.mbInfo'
+		'mms.store.mbinfo'
 	],
 	controller:'MbListMainController',
 	xtype: 'layout-horizontal-box',

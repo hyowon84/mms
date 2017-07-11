@@ -6,7 +6,7 @@ Ext.define('mms.view.master.NodeAlertMain', {
 		'mms.view.master.GridNodeAlertList',
 		'mms.view.master.NodeAlertMainController',
 		'mms.store.NodeList',
-		'mms.store.mbInfo',
+		'mms.store.mbinfo',
 		'mms.store.MemberList',
 		'mms.view.admin.GridClusterList',
 		'mms.view.master.GridMemberListB'

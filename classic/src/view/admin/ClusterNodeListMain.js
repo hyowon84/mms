@@ -68,14 +68,14 @@ Ext.define('mms.view.combo.alert_level', {
 
 Ext.define('mms.view.admin.ClusterNodeListMain', {
 	extend: 'Ext.panel.Panel',
-	alias: 'widget.MbListMain',
+	alias: 'widget.ClusterNodeListMain',
 	requires:[
 		'mms.view.admin.ClusterNodeListMainController',
 		'mms.view.admin.GridClusterList',
 		'mms.view.admin.GridNodeList',
 		'mms.view.admin.GridMemberList',
 		'mms.store.MemberList',
-		'mms.store.mbInfo'
+		'mms.store.mbinfo'
 	],
 	controller:'ClusterNodeListMainController',
 	xtype: 'layout-horizontal-box',

@@ -31,11 +31,11 @@ Ext.define('mms.view.dashboard.GridNodeList',{
 			autoWidth : true,
 			selType: 'checkboxmodel',
 			columns : [
-				{ text : '노드ID',				width : 120,		dataIndex : 'node_id',			align:'left'	},
+				{ text : '노드ID',			width : 120,		dataIndex : 'node_id',			align:'left'	},
 				{ text : '노드 별칭',		width : 120,		dataIndex : 'node_name',		align:'left'	},
-				{ text : 'O/S',		 			width : 150,		dataIndex : 'node_os',			align:'left'	},
-				{ text : '유형', 				width : 130,		dataIndex : 'node_type',		align:'left'	},
-				{ text : '노드IP',				width : 130,		dataIndex : 'node_ip',			align:'left'	},
+				{ text : 'O/S', 				width: 140,			dataIndex : 'node_os',			align:'center', 	editor:  {xtype : 'cb_nodeos'},				renderer: rendererCombo	},
+				{ text : '유형', 				width: 140,			dataIndex : 'node_type',		align:'center', 	editor:  {xtype : 'cb_nodetype'},			renderer: rendererCombo	},
+				{ text : '노드IP',			width : 130,		dataIndex : 'node_ip',			align:'left'	},
 				{ text : '갱신일', 			width : 130,		dataIndex : 'upd_date',			align:'left'	}
 			],
 			bbar: {
@@ -54,7 +54,8 @@ Ext.define('mms.view.dashboard.GridNodeList',{
 		this.getStore().load();
 	},
 	listeners : {
-		selectionchange: 'onSelectChange'
+		selectionchange: 'onSelectChange',
+		click : function(){}
 	}
 });
 
